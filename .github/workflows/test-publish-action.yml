@@ -1,0 +1,10 @@
+name: test-publish-action
+on: [push]
+jobs:
+  run-godel-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls -la
+      - run: la -la /
+      - run: ./godelw build
