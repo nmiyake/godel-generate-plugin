@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('godelw', 'godel/config/godel.yml') }}
           restore-keys: |
             ${{ runner.os }}-godel-
-      - run: ./godelw build
+      - run: ./godelw dist
         env:
           GOPATH: "/home/runner/go"
       - run: ./godelw publish github --dry-run --api-url=$GITHUB_API_URL --owner=nmiyake --repository=godel-generate-plugin --token=${{ secrets.GITHUB_TOKEN }}
