@@ -31,3 +31,5 @@ jobs:
           GOARCH: "amd64"
           CGO_ENABLED: "0"
       - run: ./godelw build
+        env:
+          GOPATH: "/home/runner/go"
