@@ -23,9 +23,11 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('godelw', 'godel/config/godel.yml') }}
           restore-keys: |
             ${{ runner.os }}-godel-
-      - run: go env
       - run: /opt/hostedtoolcache/go/1.16.0/x64/bin/go build -o /home/runner/work/godel-generate-plugin/godel-generate-plugin/out/build/generate-plugin/unspecified/linux-amd64/generate-plugin ./.
         env:
           GO111MODULE: "on"
           GOFLAGS: "-mod=vendor"
+          GOOS: "linux"
+          GOARCH: "amd64"
+          CGO_ENABLED: "0"
       - run: ./godelw build
