@@ -26,3 +26,4 @@ jobs:
       - run: echo "$GOPATH"
       - run: go env
       - run: ./godelw
+      - run: ./godelw build
