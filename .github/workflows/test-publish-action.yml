@@ -24,4 +24,5 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-godel-
       - run: echo "$GOPATH"
+      - run: go env
 #      - run: ./godelw build
