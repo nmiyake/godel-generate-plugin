@@ -8,14 +8,14 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '1.16.0'
-#      - uses: actions/cache@v2
-#        with:
-#          path: |
-#            ~/go/pkg/mod
-#            ~/.cache/go-build
-#          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-#          restore-keys: |
-#            ${{ runner.os }}-go-
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - uses: actions/cache@v2
         with:
           path: |
@@ -23,13 +23,9 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('godelw', 'godel/config/godel.yml') }}
           restore-keys: |
             ${{ runner.os }}-godel-
-      - run: /opt/hostedtoolcache/go/1.16.0/x64/bin/go build -o /home/runner/work/godel-generate-plugin/godel-generate-plugin/out/build/generate-plugin/unspecified/linux-amd64/generate-plugin ./.
-        env:
-          GO111MODULE: "on"
-          GOFLAGS: "-mod=vendor"
-          GOOS: "linux"
-          GOARCH: "amd64"
-          CGO_ENABLED: "0"
       - run: ./godelw build
+        env:
+          GOPATH: "/home/runner/go"
+      - run: ./godelw publish github --dry-run --api-url=$GITHUB_API_URL --owner=nmiyake --repository=godel-generate-plugin --token=${{ secrets.GITHUB_TOKEN }}
         env:
           GOPATH: "/home/runner/go"
