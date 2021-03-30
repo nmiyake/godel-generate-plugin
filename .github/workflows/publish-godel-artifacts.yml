@@ -4,7 +4,7 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
-  run-godel-build:
+  run-godel-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Wait on checks
@@ -13,6 +13,7 @@ jobs:
           ref: ${{ github.ref }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 20
+          running-workflow-name: 'run-godel-publish'
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
