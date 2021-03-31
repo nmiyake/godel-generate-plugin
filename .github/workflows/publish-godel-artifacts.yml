@@ -8,12 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait on checks
-        uses: lewagon/wait-on-check-action@v0.2
-        with:
-          ref: ${{ github.ref }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 20
-          running-workflow-name: 'run-godel-publish'
+        uses: jitterbit/await-check-suites@v1
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
