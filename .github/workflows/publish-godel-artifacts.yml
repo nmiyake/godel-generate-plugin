@@ -7,13 +7,13 @@ jobs:
   run-godel-publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait on tests
-        uses: lewagon/wait-on-check-action@master
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-build
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: 'ci/circleci: test'
           ref: ${{ github.ref }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-          check-name: 'ci/circleci: test'
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
